@@ -7,7 +7,7 @@ import CircleIcon from "@mui/icons-material/Circle";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-function CameraList() {
+function CameraList({ darkMode = true }) {
   const navigate = useNavigate();
   const carouselRef = useRef(null);
 
@@ -59,11 +59,8 @@ function CameraList() {
 
   const scroll = (direction) => {
     const container = carouselRef.current;
-
     if (!container) return;
-
     const scrollAmount = 320;
-
     container.scrollBy({
       left: direction === "left" ? -scrollAmount : scrollAmount,
       behavior: "smooth",
@@ -77,7 +74,6 @@ function CameraList() {
         position: "relative",
       }}
     >
-      {/* Header */}
       <div
         style={{
           display: "flex",
@@ -91,6 +87,7 @@ function CameraList() {
             margin: 0,
             fontSize: "1.5rem",
             fontWeight: 600,
+            color: darkMode ? "#f1f5f9" : "#0f172a",
           }}
         >
           Cámaras conectadas
@@ -98,7 +95,7 @@ function CameraList() {
 
         <span
           style={{
-            color: "#94a3b8",
+            color: darkMode ? "#94a3b8" : "#64748b",
             fontSize: "0.95rem",
           }}
         >
@@ -106,7 +103,6 @@ function CameraList() {
         </span>
       </div>
 
-      {/* Botón izquierda */}
       <button
         onClick={() => scroll("left")}
         style={{
@@ -115,13 +111,13 @@ function CameraList() {
           top: "50%",
           transform: "translateY(-50%)",
           zIndex: 10,
-          background: "#1e293b",
-          border: "none",
+          background: darkMode ? "#1e293b" : "#ffffff",
+          border: `1px solid ${darkMode ? "#334155" : "#e2e8f0"}`,
           borderRadius: "50%",
           width: "40px",
           height: "40px",
           cursor: "pointer",
-          color: "white",
+          color: darkMode ? "white" : "#0f172a",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -130,7 +126,6 @@ function CameraList() {
         <ArrowBackIosNewIcon fontSize="small" />
       </button>
 
-      {/* Carrusel */}
       <div
         ref={carouselRef}
         style={{
@@ -149,24 +144,25 @@ function CameraList() {
               key={cam.id}
               style={{
                 minWidth: "300px",
-                background: "#1e293b",
+                background: darkMode ? "#1e293b" : "#ffffff",
                 borderRadius: "16px",
                 overflow: "hidden",
-                border: "1px solid #334155",
+                border: `1px solid ${darkMode ? "#334155" : "#e2e8f0"}`,
                 transition: "transform 0.25s ease, box-shadow 0.25s ease",
                 cursor: "pointer",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "scale(1.05)";
                 e.currentTarget.style.boxShadow =
-                  "0 20px 40px rgba(0,0,0,0.35)";
+                  darkMode
+                    ? "0 20px 40px rgba(0,0,0,0.35)"
+                    : "0 12px 24px rgba(0,0,0,0.12)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "scale(1)";
                 e.currentTarget.style.boxShadow = "none";
               }}
             >
-              {/* Preview */}
               <div
                 style={{
                   width: "100%",
@@ -205,9 +201,7 @@ function CameraList() {
                 )}
               </div>
 
-              {/* Info */}
               <div style={{ padding: "18px" }}>
-                {/* Nombre */}
                 <div
                   style={{
                     display: "flex",
@@ -220,6 +214,7 @@ function CameraList() {
                     style={{
                       margin: 0,
                       fontSize: "1.1rem",
+                      color: darkMode ? "#f1f5f9" : "#0f172a",
                     }}
                   >
                     {cam.name}
@@ -233,10 +228,9 @@ function CameraList() {
                   />
                 </div>
 
-                {/* Tipo */}
                 <div
                   style={{
-                    color: "#94a3b8",
+                    color: darkMode ? "#94a3b8" : "#64748b",
                     fontSize: "0.9rem",
                     marginBottom: "10px",
                   }}
@@ -244,10 +238,9 @@ function CameraList() {
                   {cam.type}
                 </div>
 
-                {/* Last seen */}
                 <div
                   style={{
-                    color: "#64748b",
+                    color: darkMode ? "#64748b" : "#94a3b8",
                     fontSize: "0.8rem",
                     marginBottom: "16px",
                   }}
@@ -255,14 +248,13 @@ function CameraList() {
                   {cam.lastSeen}
                 </div>
 
-                {/* Botón */}
                 <button
                   onClick={() => isConnected && handleViewLive(cam.id)}
                   disabled={!isConnected}
                   style={{
                     width: "100%",
                     padding: "10px",
-                    background: isConnected ? "#3b82f6" : "#334155",
+                    background: isConnected ? "#3b82f6" : (darkMode ? "#334155" : "#cbd5e1"),
                     border: "none",
                     borderRadius: "10px",
                     color: "white",
@@ -291,7 +283,6 @@ function CameraList() {
         })}
       </div>
 
-      {/* Botón derecha */}
       <button
         onClick={() => scroll("right")}
         style={{
@@ -300,13 +291,13 @@ function CameraList() {
           top: "50%",
           transform: "translateY(-50%)",
           zIndex: 10,
-          background: "#1e293b",
-          border: "none",
+          background: darkMode ? "#1e293b" : "#ffffff",
+          border: `1px solid ${darkMode ? "#334155" : "#e2e8f0"}`,
           borderRadius: "50%",
           width: "40px",
           height: "40px",
           cursor: "pointer",
-          color: "white",
+          color: darkMode ? "white" : "#0f172a",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",

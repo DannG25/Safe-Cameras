@@ -3,7 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import RadarIcon from "@mui/icons-material/Radar";
 import CircularProgress from "@mui/material/CircularProgress";
 
-function CameraScanner() {
+function CameraScanner({ darkMode = true }) {
   const [isScanning, setIsScanning] = useState(false);
   const [scanResult, setScanResult] = useState(null);
 
@@ -38,17 +38,16 @@ function CameraScanner() {
       {/* CONTENEDOR DASHBOARD */}
       <div
         style={{
-          background: "#1e293b",
+          background: darkMode ? "#1e293b" : "#ffffff",
           borderRadius: "16px",
-          border: "1px solid #334155",
+          border: `1px solid ${darkMode ? "#334155" : "#e2e8f0"}`,
           padding: "28px",
           width: "100%",
           maxWidth: "720px",
           margin: "0 auto",
-          boxShadow: "0 10px 25px rgba(0,0,0,0.25)",
+          boxShadow: darkMode ? "0 10px 25px rgba(0,0,0,0.25)" : "0 4px 12px rgba(0,0,0,0.08)",
         }}
       >
-        {/* Header */}
         <div
           style={{
             marginBottom: "22px",
@@ -60,6 +59,7 @@ function CameraScanner() {
               margin: 0,
               fontSize: "1.4rem",
               fontWeight: 600,
+              color: darkMode ? "#f1f5f9" : "#0f172a",
             }}
           >
             Escáner de cámaras
@@ -69,7 +69,7 @@ function CameraScanner() {
             style={{
               marginTop: "8px",
               fontSize: "0.95rem",
-              color: "#94a3b8",
+              color: darkMode ? "#94a3b8" : "#64748b",
             }}
           >
             Detecta automáticamente cámaras IP en tu red local

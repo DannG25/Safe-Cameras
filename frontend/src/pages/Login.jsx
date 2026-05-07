@@ -11,9 +11,11 @@ function Login() {
 const styles = {
   container: {
     height: "100vh",
+    width: "100vw",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    background: "#f0f4ff",
   },
 };
 

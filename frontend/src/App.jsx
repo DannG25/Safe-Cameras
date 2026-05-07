@@ -1,25 +1,40 @@
-import { Outlet } from 'react-router-dom';
+import { useState, createContext } from "react";
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar.jsx";
+import Header from "./components/Header.jsx";
 
- function App() {
-    return (
-      <div style={{
-        display: 'flex',
-        minHeight: '100vh',
-        transition: 'background-color 0.3s, color 0.3s',
-      }}>
-        <div style={{
-          width: '100%',
-          maxWidth: '1400px',
-          margin: '0 auto',
-          padding: '0 16px',
-          flex: 1,
-          display: 'flex',
-          flexDirection: 'column'
-        }}>
+export const ThemeContext = createContext(false);
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  return (
+    <ThemeContext.Provider value={darkMode}>
+      <div style={{ display: "flex", minHeight: "100vh" }}>
+        <Navbar
+          darkMode={darkMode}
+          isCollapsed={isCollapsed}
+          onToggle={() => setIsCollapsed(!isCollapsed)}
+        />
+        <Header
+          darkMode={darkMode}
+          toggleDarkMode={() => setDarkMode(!darkMode)}
+          isCollapsed={isCollapsed}
+        />
+        <div
+          style={{
+            marginLeft: isCollapsed ? 72 : 240,
+            width: "100%",
+            paddingTop: "64px",
+            transition: "margin-left 0.3s ease",
+          }}
+        >
           <Outlet />
         </div>
       </div>
-    );
- }
+    </ThemeContext.Provider>
+  );
+}
 
 export default App;

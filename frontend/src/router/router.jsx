@@ -1,20 +1,20 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import App from "../App.jsx";
-import Home from "../pages/Login.jsx";
-// import About from "./pages/About.jsx";
-// import Services from "./pages/Services.jsx";
-// import Contact from "./pages/Contact.jsx";
+import Login from "../pages/Login.jsx";
+import Home from "../pages/Dashboard.jsx";
 
 const router = createBrowserRouter([
+  {
+    path: "/login",
+    element: <Login />,
+  },
   {
     path: "/",
     element: <App />,
     children: [
-      { index: true, element: <Home /> },
-    //   { path: "about", element: <About /> },
-    //   { path: "services", element: <Services /> },
-    //   { path: "contact", element: <Contact /> },
+      { index: true, element: <Navigate to="/home" replace /> },
+      { path: "home", element: <Home /> },
     ],
   },
 ]);
